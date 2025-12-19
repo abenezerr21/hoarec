@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" fill="none">
+  <!-- Brand Mark / Icon -->
+  <g transform="translate(20, 10)">
+    <!-- Leaf -->
+    <path d="M40 80 C 10 80 0 50 0 40 C 0 10 30 0 40 0 C 70 0 80 20 80 40 C 80 70 50 80 40 80 Z" fill="#10B981" />
+    <path d="M40 80 C 40 40 40 20 40 0" stroke="#047857" stroke-width="2" />
+    
+    <!-- Water Drop overlay -->
+    <path d="M55 55 C 45 55 40 45 40 35 C 40 25 55 10 55 10 C 55 10 70 25 70 35 C 70 45 65 55 55 55 Z" fill="#3B82F6" opacity="0.8" />
+    
+    <!-- Sun Accent -->
+    <circle cx="20" cy="20" r="12" fill="#FBBF24" opacity="0.9" />
+  </g>
+  
+  <!-- Text: HoAREC&N -->
+  <text x="110" y="65" font-family="Arial, sans-serif" font-weight="bold" font-size="48" fill="#064E3B">HoAREC&N</text>
+  
+  <!-- Subtitle -->
+  <text x="112" y="85" font-family="Arial, sans-serif" font-size="14" fill="#65A30D" letter-spacing="1">HORN OF AFRICA ENVIRONMENT CENTER</text>
+</svg>

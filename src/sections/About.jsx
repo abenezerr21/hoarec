@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { Sun, Trees, Waves, BookOpen } from "lucide-react";
 import Container from "../components/layout/Container";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
@@ -6,61 +8,106 @@ import Button from "../components/ui/Button";
 const images = [
   "/images/hero-bg.png",
   "/images/news-hero.png",
-  "/images/hero-bg.png", // Reusing for demo loop
+  "/images/hero-bg.png",
   "/images/news-hero.png"
 ];
 
 const About = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
+  // existing image rotation logic
   useEffect(() => {
     const timer = setInterval(() => {
-      // Move backwards through the stack to create "Back to Front" flow
       setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
     }, 4000);
     return () => clearInterval(timer);
   }, []);
 
   const getCardStyle = (index) => {
-    // Calculate position relative to active card
     const offset = (index - activeIndex + images.length) % images.length;
-
-    // We only show 3 cards in the stack. offset 0 is front.
-    // Logic: 0 -> Front. 1 -> Behind 1. 2 -> Behind 2.
-    // Cards > 2 are hidden behind the stack?
-    // User wants "Back picture come to front".
-    // When activeIndex decrements:
-    // Old Front (0) -> become Offset 1. (Moves Back/Right)
-    // Old Back (2) -> becomes Offset 0. (Moves to Front) - BUT wrapped around!
-    // Wait. If activeIndex decrements.
-    // Index i. Offset = i - current.
-    // Current 0. Index 2 offset = 2.
-    // Current -1 (2). Index 2 offset = 0.
-    // So visual transform: 2 -> 0. (Back -> Front). 
-
-    if (offset === 0) {
-      return "z-30 opacity-100 scale-100 translate-x-0 translate-y-0";
-    } else if (offset === 1) {
-      return "z-20 opacity-90 scale-95 translate-x-4 translate-y-4";
-    } else if (offset === 2) {
-      return "z-10 opacity-80 scale-90 translate-x-8 translate-y-8";
-    } else {
-      // Everything else hides behind the last one
-      return "z-0 opacity-0 scale-90 translate-x-8 translate-y-8";
-    }
+    if (offset === 0) return "z-30 opacity-100 scale-100 translate-x-0 translate-y-0";
+    if (offset === 1) return "z-20 opacity-90 scale-95 translate-x-4 translate-y-4";
+    if (offset === 2) return "z-10 opacity-80 scale-90 translate-x-8 translate-y-8";
+    return "z-0 opacity-0 scale-90 translate-x-8 translate-y-8";
   };
 
   return (
-    <section id="about" className="relative py-24 bg-slate-50 overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-50" />
-      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50" />
+    <section
+      id="about"
+      ref={sectionRef}
+      className="relative py-32 bg-slate-50 overflow-hidden"
+    >
+      {/* --- Corner Decorative Elements (Scroll/View Animated) --- */}
+
+      {/* Top Left: Solar/Energy */}
+      <motion.div
+        initial={{ opacity: 0, x: -50, y: -50 }}
+        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+        className="absolute top-0 left-0 p-8 hidden md:block pointer-events-none z-0"
+      >
+        <div className="relative">
+          <div className="absolute inset-0 bg-yellow-400 blur-2xl opacity-50 rounded-full"></div>
+          <Sun className="w-24 h-24 text-yellow-500" strokeWidth={1.5} />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 border-2 border-dashed border-yellow-400/60 rounded-full w-32 h-32 -m-4"
+          />
+        </div>
+      </motion.div>
+
+      {/* Top Right: Conservation/Trees */}
+      <motion.div
+        initial={{ opacity: 0, x: 50, y: -50 }}
+        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+        className="absolute top-0 right-0 p-8 hidden md:block pointer-events-none z-0"
+      >
+        <div className="relative">
+          <div className="absolute inset-0 bg-emerald-400 blur-2xl opacity-50 rounded-full"></div>
+          <Trees className="w-24 h-24 text-emerald-600" strokeWidth={1.5} />
+        </div>
+      </motion.div>
+
+      {/* Bottom Left: Water */}
+      <motion.div
+        initial={{ opacity: 0, x: -50, y: 50 }}
+        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+        className="absolute bottom-0 left-0 p-8 hidden md:block pointer-events-none z-0"
+      >
+        <div className="relative">
+          <div className="absolute inset-0 bg-blue-400 blur-2xl opacity-50 rounded-full"></div>
+          <Waves className="w-24 h-24 text-blue-600" strokeWidth={1.5} />
+        </div>
+      </motion.div>
+
+      {/* Bottom Right: Education */}
+      <motion.div
+        initial={{ opacity: 0, x: 50, y: 50 }}
+        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+        className="absolute bottom-0 right-0 p-8 hidden md:block pointer-events-none z-0"
+      >
+        <div className="relative">
+          <div className="absolute inset-0 bg-indigo-400 blur-2xl opacity-50 rounded-full"></div>
+          <BookOpen className="w-24 h-24 text-indigo-600" strokeWidth={1.5} />
+        </div>
+      </motion.div>
+
 
       <Container className="relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-
           {/* Left Column: Text */}
-          <div className="space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
             <SectionHeader
               eyebrow="Who We Are"
               title="Connecting the Horn for Sustainable Development"
@@ -82,11 +129,15 @@ const About = () => {
                 Learn More About Us
               </Button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Image Stack Loop */}
-          <div className="relative h-[450px] w-full max-w-lg mx-auto lg:max-w-none flex items-center justify-center">
-
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative h-[450px] w-full max-w-lg mx-auto lg:max-w-none flex items-center justify-center"
+          >
             <div className="relative w-full h-full max-w-md aspect-[4/5]">
               {/* Fixed decorative frame behind stack */}
               <div className="absolute inset-0 bg-blue-100/50 rounded-3xl -rotate-6 scale-95 transform"></div>
@@ -102,13 +153,7 @@ const About = () => {
                     alt={`About Hoarec ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
-                  {/* Overlay for depth */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-
-                  {/* Optional: Text on card? */}
-                  {/* <div className="absolute bottom-6 left-6 right-6">
-                      <p className="text-white font-bold text-lg drop-shadow-md">Impact Story {index + 1}</p>
-                  </div> */}
                 </div>
               ))}
 
@@ -123,8 +168,7 @@ const About = () => {
                 <p className="text-slate-600 text-xs leading-snug">Over 15 years of restoring ecosystems.</p>
               </div>
             </div>
-          </div>
-
+          </motion.div>
         </div>
       </Container>
     </section>
