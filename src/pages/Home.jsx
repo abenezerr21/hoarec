@@ -4,8 +4,14 @@ import Services from "../sections/Services";
 import News from "../sections/News";
 import About from "../sections/About";
 import Partners from "../sections/Partners";
-import Founders from "../sections/Founders";
+import ImpactNumbers from "../sections/ImpactNumbers";
+
+import VisitHeadquarters from "../sections/VisitHeadquarters";
+import MeetingRoomRental from "../sections/MeetingRoomRental";
+import NetworkSection from "../sections/NetworkSection";
 import Footer from "../components/layout/Footer";
+import FloatingAnnouncement from "../components/ui/FloatingAnnouncement";
+
 
 const Home = () => {
   return (
@@ -15,11 +21,16 @@ const Home = () => {
         <Hero />
         <About />
         <Services />
-        <News />
+        <ImpactNumbers />
         <Partners />
-        <Founders />
+        <NetworkSection />
+
+        <VisitHeadquarters />
+        <News />
+        <MeetingRoomRental />
       </main>
       <Footer />
+      <FloatingAnnouncement />
     </div>
   );
 };

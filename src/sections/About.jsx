@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { Sun, Trees, Waves, BookOpen } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 import Container from "../components/layout/Container";
 import SectionHeader from "../components/ui/SectionHeader";
 import Button from "../components/ui/Button";
+import about1 from "../images/about1.jpg";
+import about2 from "../images/about2.JPG";
+import about3 from "../images/about3.JPG";
+import about4 from "../images/about4.JPG";
 
 const images = [
-  "/images/hero-bg.png",
-  "/images/news-hero.png",
-  "/images/hero-bg.png",
-  "/images/news-hero.png"
+  about1,
+  about2,
+  about3,
+  about4
 ];
 
 const About = () => {
@@ -39,64 +42,6 @@ const About = () => {
       ref={sectionRef}
       className="relative py-32 bg-slate-50 overflow-hidden"
     >
-      {/* --- Corner Decorative Elements (Scroll/View Animated) --- */}
-
-      {/* Top Left: Solar/Energy */}
-      <motion.div
-        initial={{ opacity: 0, x: -50, y: -50 }}
-        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-        className="absolute top-0 left-0 p-8 hidden md:block pointer-events-none z-0"
-      >
-        <div className="relative">
-          <div className="absolute inset-0 bg-yellow-400 blur-2xl opacity-50 rounded-full"></div>
-          <Sun className="w-24 h-24 text-yellow-500" strokeWidth={1.5} />
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 border-2 border-dashed border-yellow-400/60 rounded-full w-32 h-32 -m-4"
-          />
-        </div>
-      </motion.div>
-
-      {/* Top Right: Conservation/Trees */}
-      <motion.div
-        initial={{ opacity: 0, x: 50, y: -50 }}
-        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-        className="absolute top-0 right-0 p-8 hidden md:block pointer-events-none z-0"
-      >
-        <div className="relative">
-          <div className="absolute inset-0 bg-emerald-400 blur-2xl opacity-50 rounded-full"></div>
-          <Trees className="w-24 h-24 text-emerald-600" strokeWidth={1.5} />
-        </div>
-      </motion.div>
-
-      {/* Bottom Left: Water */}
-      <motion.div
-        initial={{ opacity: 0, x: -50, y: 50 }}
-        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-        transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-        className="absolute bottom-0 left-0 p-8 hidden md:block pointer-events-none z-0"
-      >
-        <div className="relative">
-          <div className="absolute inset-0 bg-blue-400 blur-2xl opacity-50 rounded-full"></div>
-          <Waves className="w-24 h-24 text-blue-600" strokeWidth={1.5} />
-        </div>
-      </motion.div>
-
-      {/* Bottom Right: Education */}
-      <motion.div
-        initial={{ opacity: 0, x: 50, y: 50 }}
-        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-        className="absolute bottom-0 right-0 p-8 hidden md:block pointer-events-none z-0"
-      >
-        <div className="relative">
-          <div className="absolute inset-0 bg-indigo-400 blur-2xl opacity-50 rounded-full"></div>
-          <BookOpen className="w-24 h-24 text-indigo-600" strokeWidth={1.5} />
-        </div>
-      </motion.div>
 
 
       <Container className="relative z-10">

@@ -1,125 +1,142 @@
 import { Link } from "react-router-dom";
 import Container from "../components/layout/Container";
-import SectionHeader from "../components/ui/SectionHeader";
+import newsHeader from "../images/newsheader.jpg";
 
 const newsItems = [
     {
-        title: "Community Reforestation Initiative 2024",
-        date: "December 15, 2024",
-        image: "/images/hero-bg.png",
-        category: "Environmental Action",
+        id: 1,
+        title: "Capacity-Building Training on Evidence-Based, Inclusive Responses to Climate-Induced Migration Underway in Mombasa, Kenya  ",
+        date: "February 25, 2026",
+        summary: "Our new initiative aims to strengthen community-based adaptation strategies across the Horn of Africa, focusing on sustainable water management and agricultural security for vulnerable populations.",
+        image: newsHeader,
+        category: "Climate Action",
     },
     {
-        title: "Clean Water Access Expansion",
-        date: "December 10, 2024",
+        id: 2,
+        title: "New Research on Biodiversity Corridors in Ethiopia",
+        date: "February 10, 2024",
+        image: newsHeader,
+        category: "Research",
+    },
+    {
+        id: 3,
+        title: "Regional Environment Forum Highlights Sustainable Growth",
+        date: "February 05, 2024",
         image: "/images/news-hero.png",
-        category: "Community Development",
+        category: "Events",
     },
     {
-        title: "Climate-Smart Agriculture Training",
-        date: "December 5, 2024",
+        id: 4,
+        title: "Success Stories: Sustainable Land Management in Arid Zones",
+        date: "January 28, 2024",
         image: "/images/hero-bg.png",
-        category: "Education",
+        category: "Success Story",
     },
 ];
 
-const News = () => (
-    <section
-        id="news"
-        className="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-emerald-100/50"
-    >
-        <Container className="relative py-24">
-            {/* Header Section */}
-            <div className="mb-12 text-center">
-                <SectionHeader
-                    eyebrow="Latest Updates"
-                    title="News & Impact Stories"
-                    description="Stay informed about our latest environmental initiatives and community impact across the Horn of Africa"
-                    className="text-stone-900 [&>p]:text-stone-600"
-                />
-            </div>
+const News = () => {
+    const featured = newsItems[0];
+    const secondary = newsItems.slice(1, 4);
 
-            {/* News Cards */}
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {newsItems.map((item, index) => (
-                    <div
-                        key={index}
-                        className="group relative h-[400px] cursor-pointer overflow-hidden rounded-3xl bg-stone-100 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/30"
-                    >
-                        {/* Background Image */}
-                        <div
-                            className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
-                            style={{
-                                backgroundImage: `url(${item.image})`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                            }}
-                        />
-
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-900/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-
-                        {/* Content */}
-                        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                            {/* Decorative Line */}
-                            <div className="mb-4 h-1 w-12 rounded-full bg-yellow-400 transform origin-left transition-all duration-300 group-hover:w-20" />
-
-                            {/* Meta */}
-                            <div className="mb-3 flex items-center gap-3 text-sm font-medium text-emerald-100/90">
-                                <span className="rounded-full bg-emerald-800/50 backdrop-blur-sm border border-emerald-400/30 px-3 py-1">
-                                    {item.category}
-                                </span>
-                                <span>{item.date}</span>
-                            </div>
-
-                            {/* Title */}
-                            <h3 className="text-2xl font-bold leading-tight text-white group-hover:text-yellow-300 transition-colors">
-                                {item.title}
-                            </h3>
-
-                            {/* Hover Arrow */}
-                            <div className="mt-6 flex items-center gap-2 text-sm font-bold text-yellow-300 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                                READ STORY
-                                <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                    />
-                                </svg>
-                            </div>
+    return (
+        <section id="news" className="bg-white py-24">
+            <Container>
+                {/* Section Header */}
+                <div className="mb-16">
+                    <p className="text-nature-green-600 font-bold uppercase tracking-wider text-sm mb-2">
+                        Latest News
+                    </p>
+                    <div className="relative inline-block">
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-stone-900 mb-4">
+                            What's New
+                        </h2>
+                        {/* Elegant dual-color underline */}
+                        <div className="flex w-full h-1">
+                            <div className="w-1/2 bg-nature-green-500 rounded-l-full"></div>
+                            <div className="w-1/2 bg-nature-blue-500 rounded-r-full"></div>
                         </div>
                     </div>
-                ))}
-            </div>
+                </div>
 
-            {/* Bottom CTA */}
-            <div className="mt-16 text-center">
-                <Link to="/news" className="group relative inline-flex items-center gap-3 rounded-full bg-emerald-900 px-8 py-4 text-base font-bold text-white shadow-xl shadow-emerald-900/20 hover:shadow-emerald-900/40 hover:bg-emerald-800 transition-all duration-300 hover:scale-105">
-                    <span>View All News</span>
-                    <svg
-                        className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                {/* Main Layout Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    {/* Left Side: Featured Article (65%) */}
+                    <div className="lg:col-span-8">
+                        <Link
+                            to={`/news/${featured.id}`}
+                            className="group block"
+                        >
+                            <div className="overflow-hidden rounded-2xl shadow-sm border border-stone-100 mb-6 bg-white transition-all duration-500 hover:shadow-xl">
+                                <div className="aspect-[16/9] overflow-hidden">
+                                    <img
+                                        src={featured.image}
+                                        alt={featured.title}
+                                        className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                </div>
+                                <div className="p-8">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <span className="text-xs font-bold text-nature-green-600 bg-nature-green-50 px-3 py-1 rounded-full uppercase tracking-wide">
+                                            {featured.category}
+                                        </span>
+                                        <span className="text-sm text-stone-400">
+                                            {featured.date}
+                                        </span>
+                                    </div>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-stone-900 mb-4 group-hover:text-nature-green-600 transition-colors duration-300">
+                                        {featured.title}
+                                    </h3>
+                                    <p className="text-stone-600 leading-relaxed text-lg line-clamp-3">
+                                        {featured.summary}
+                                    </p>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+
+                    {/* Right Side: News List (35%) */}
+                    <div className="lg:col-span-4 flex flex-col gap-8">
+                        {secondary.map((item, index) => (
+                            <Link
+                                key={item.id}
+                                to={`/news/${item.id}`}
+                                className="group flex gap-4 transition-all duration-300"
+                            >
+                                <div className="w-24 h-24 shrink-0 overflow-hidden rounded-xl border border-stone-100 shadow-sm">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <h4 className="font-bold text-stone-900 leading-tight mb-2 group-hover:text-nature-blue-600 transition-colors duration-300 line-clamp-2">
+                                        {item.title}
+                                    </h4>
+                                    <span className="text-xs text-stone-400 font-medium">
+                                        {item.date}
+                                    </span>
+                                    {index < secondary.length - 1 && (
+                                        <div className="mt-6 border-b border-stone-100 w-full group-last:hidden"></div>
+                                    )}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Bottom CTA */}
+                <div className="mt-16 text-center">
+                    <Link
+                        to="/news"
+                        className="inline-flex items-center justify-center px-10 py-4 text-base font-bold text-white bg-nature-green-700 rounded-full transition-all duration-300 hover:bg-nature-green-800 hover:scale-105 hover:shadow-lg shadow-md uppercase tracking-wide"
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                        />
-                    </svg>
-                </Link>
-            </div>
-        </Container>
-    </section>
-);
+                        View More News
+                    </Link>
+                </div>
+            </Container>
+        </section>
+    );
+};
 
 export default News;
